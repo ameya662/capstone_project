@@ -13,6 +13,6 @@ resource "aws_internet_gateway" "dev_igw" {
   vpc_id = aws_vpc.dev_vpc.id
 
   tags       =  {
-    name     = "dev_igw"
+    Name     = "dev_igw"
   }
 }
