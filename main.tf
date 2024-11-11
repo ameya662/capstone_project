@@ -5,7 +5,7 @@ resource "aws_vpc" "dev_vpc" {
   enable_dns_support = true
   
   tags       =  {
-    name     = "deham19"
+    Name     = "deham19"
   }       
 }
 # Create an Internet Gateway
