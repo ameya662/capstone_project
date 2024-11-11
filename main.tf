@@ -17,11 +17,3 @@ resource "aws_internet_gateway" "dev_igw" {
   }
 }
 
-# Create an Internet Gateway
-resource "aws_internet_gateway" "dev_igw2" {
-  vpc_id = aws_vpc.dev_vpc.id
-
-  tags       =  {
-    Name     = "Something_else"
-  }
-}
