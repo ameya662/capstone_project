@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-west-2" # Adjust as needed
-}
-
 # Create a public subnet
 resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.lab_vpc.id
