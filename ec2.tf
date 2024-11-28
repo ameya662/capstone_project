@@ -3,7 +3,7 @@ resource "aws_instance" "testserver" {
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public_subnet_1.id
-  security_group_ids     = [aws_security_group.webserver_sg.id]
+  vpc_security_group_ids     = [aws_security_group.webserver_sg.id]
   associate_public_ip_address = true
 
   tags = {
