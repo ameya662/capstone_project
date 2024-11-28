@@ -42,7 +42,7 @@ resource "aws_launch_template" "lab_launch_template" {
   description        = "A web server for the load test app"
   instance_type      = "t3.micro"
   image_id           = aws_ami_from_instance.web_server_ami.id
-  security_group_ids = [aws_security_group.webserver_sg.id]
+  vpc_security_group_ids = [aws_security_group.webserver_sg.id]
 }
 
 # Task 4: Creating an Auto Scaling Group
