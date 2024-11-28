@@ -118,11 +118,22 @@ resource "aws_subnet" "private_subnet_2" {
   availability_zone = "us-east-1b"
 }
 
-resource "aws_security_group" "web_sg" {
-  name        = "Web Security Group"
-  vpc_id      = aws_vpc.lab_vpc.id
+# Create a security group allowing SSH and HTTP access
+
+resource "aws_security_group" "webserver_sg" {
+  name   = "WebServerSG"
+  vpc_id = aws_vpc.lab_vpc.id
 
   ingress {
+    description = "Allow SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "Allow HTTP"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -130,6 +141,7 @@ resource "aws_security_group" "web_sg" {
   }
 
   egress {
+    description = "Allow all outbound traffic"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -137,6 +149,6 @@ resource "aws_security_group" "web_sg" {
   }
 
   tags = {
-    Name = "Web Security Group"
+    Name = "Test Server SG"
   }
 }
