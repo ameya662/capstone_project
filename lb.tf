@@ -68,16 +68,6 @@ resource "aws_autoscaling_group" "lab_asg" {
     value               = "Lab Instance"
     propagate_at_launch = true
   }
-
-  scaling_policies {
-    policy_type = "TargetTrackingScaling"
-    target_tracking_configuration {
-      predefined_metric_specification {
-        predefined_metric_type = "ASGAverageCPUUtilization"
-      }
-      target_value = 50.0
-    }
-  }
 }
 
 # Supporting Resources (Security Groups, Subnets, VPC)
