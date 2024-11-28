@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-west-2" # Adjust as needed
-}
-
 # Task 1: Creating an AMI
 resource "aws_ami_from_instance" "web_server_ami" {
   name               = "Web Server AMI"
