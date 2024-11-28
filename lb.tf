@@ -10,7 +10,7 @@ resource "aws_lb" "lab_elb" {
   name               = "LabELB"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.web_sg.id]
+  security_groups    = [aws_security_group.webserver_sg.id]
   subnets            = [
     aws_subnet.public_subnet_1.id,
     aws_subnet.public_subnet_2.id
@@ -42,7 +42,7 @@ resource "aws_launch_template" "lab_launch_template" {
   description        = "A web server for the load test app"
   instance_type      = "t3.micro"
   image_id           = aws_ami_from_instance.web_server_ami.id
-  security_group_ids = [aws_security_group.web_sg.id]
+  security_group_ids = [aws_security_group.webserver_sg.id]
 }
 
 # Task 4: Creating an Auto Scaling Group
