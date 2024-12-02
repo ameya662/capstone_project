@@ -35,7 +35,7 @@ resource "aws_subnet" "private_subnet_2" {
 # Create a security group allowing SSH and HTTP access
 
 resource "aws_security_group" "nginx_sg" {
-  name   = "WebServerSG"
+  name   = "NginxSG"
   vpc_id = aws_vpc.lab_vpc.id
 
   ingress {
@@ -72,11 +72,11 @@ resource "aws_security_group" "wordpress_sg" {
   vpc_id = aws_vpc.lab_vpc.id
 
   ingress {
-    description = "Allow HTTP"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    description      = "Allow HTTP from Nginx SG"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    security_groups  = [data.aws_security_group.nginx_sg.id] # Reference Nginx SG
   }
 
   egress {
