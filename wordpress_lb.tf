@@ -10,7 +10,7 @@ resource "aws_lb" "wordpress_alb" {
 
 # Target Group
 resource "aws_lb_target_group" "wordpresstg" {
-  name        = "nginxtg"
+  name        = "wordpresstg"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = resource.aws_vpc.lab_vpc.id
