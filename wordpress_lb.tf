@@ -3,8 +3,8 @@ resource "aws_lb" "wordpress_alb" {
   name               = "WordPressALB"
   internal           = true
   load_balancer_type = "application"
-  security_groups    = [resource.aws_security_group.wordpress_sg_sg.id]
-  subnets            = [resource.aws_subnet.public_private_1.id, resource.aws_subnet.public_private_2.id]
+  security_groups    = [resource.aws_security_group.wordpress_sg.id]
+  subnets            = [resource.aws_subnet.private_subnet_1.id, resource.aws_subnet.private_subnet_2.id]
   ip_address_type    = "ipv4"
 }
 
