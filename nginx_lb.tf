@@ -3,8 +3,8 @@ resource "aws_lb" "nginx_alb" {
   name               = "NginxALB"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [data.aws_security_group.nginx_sg.id]
-  subnets            = [data.aws_subnet.public_subnet_1.id, data.aws_subnet.public_subnet_2.id]
+  security_groups    = [resource.aws_security_group.nginx_sg.id]
+  subnets            = [resource.aws_subnet.public_subnet_1.id, resource.aws_subnet.public_subnet_2.id]
   ip_address_type    = "ipv4"
 }
 
@@ -13,7 +13,7 @@ resource "aws_lb_target_group" "nginxtg" {
   name        = "nginxtg"
   port        = 80
   protocol    = "HTTP"
-  vpc_id      = data.aws_vpc.lab_vpc.id
+  vpc_id      = resource.aws_vpc.lab_vpc.id
   target_type = "instance"
 }
 
@@ -36,7 +36,7 @@ resource "aws_launch_template" "nginxlt" {
   image_id               = "ami-061dd8b45bc7deb3d" # Replace with actual Amazon Linux 2 AMI ID
   instance_type          = "t3.micro"
   key_name               = "vockey"
-  vpc_security_group_ids = [data.aws_security_group.nginx_sg.id]
+  vpc_security_group_ids = [resource.aws_security_group.nginx_sg.id]
 
   tag_specifications {
     resource_type = "instance"
@@ -51,7 +51,7 @@ resource "aws_autoscaling_group" "nginxasg" {
   desired_capacity     = 2
   min_size             = 2
   max_size             = 4
-  vpc_zone_identifier  = [data.aws_subnet.public_subnet_1.id, data.aws_subnet.public_subnet_2.id]
+  vpc_zone_identifier  = [resource.aws_subnet.public_subnet_1.id, resource.aws_subnet.public_subnet_2.id]
   launch_template {
     id      = aws_launch_template.nginxlt.id
     version = "$Latest"
