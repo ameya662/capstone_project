@@ -76,7 +76,7 @@ resource "aws_security_group" "wordpress_sg" {
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
-    security_groups  = [data.aws_security_group.nginxsg.id] # Reference Nginx SG
+    security_groups  = [aws_security_group.nginx_sg.id] # Reference Nginx SG
   }
 
   egress {
