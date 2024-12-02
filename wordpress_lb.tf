@@ -62,7 +62,7 @@ resource "aws_autoscaling_group" "wordpressasg" {
 
 # Auto Scaling Policy
 resource "aws_autoscaling_policy" "target_tracking_policy" {
-  name                   = "TargetTrackingPolicy"
+  name                   = "TargetTrackingPolicyforWP"
   autoscaling_group_name = aws_autoscaling_group.wordpressasg.name
   policy_type            = "TargetTrackingScaling"
 

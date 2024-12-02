@@ -62,7 +62,7 @@ resource "aws_autoscaling_group" "nginxasg" {
 
 # Auto Scaling Policy
 resource "aws_autoscaling_policy" "target_tracking_policy" {
-  name                   = "TargetTrackingPolicy"
+  name                   = "TargetTrackingPolicyforNginx"
   autoscaling_group_name = aws_autoscaling_group.nginxasg.name
   policy_type            = "TargetTrackingScaling"
 
