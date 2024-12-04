@@ -39,7 +39,7 @@ resource "aws_launch_template" "nginxlt" {
   vpc_security_group_ids = [resource.aws_security_group.nginx_sg.id]
 
   # Reference the external user data file
-  user_data = <<EOF
+  user_data = <<USERDATA
 
 #!/bin/bash
 sudo yum update -y
@@ -84,7 +84,7 @@ systemctl restart nginx
 
 echo "Nginx configuration created at $CONFIG_PATH with Load Balancer DNS: $LB_DNS_NAME"
 echo "Nginx restarted successfully."
-EOF
+USERDATA
 
   tag_specifications {
     resource_type = "instance"
