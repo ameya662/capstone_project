@@ -20,11 +20,11 @@ resource "aws_security_group" "nginx_sg" {
   }
 
   ingress {
-    description     = "Allow Squid from Wordpress SG"
-    from_port       = 3128
-    to_port         = 3128
-    protocol        = "tcp"
-    security_groups = [aws_security_group.wordpress_sg.id] # Reference Nginx SG
+    description = "Allow Squid from Wordpress SG"
+    from_port   = 3128
+    to_port     = 3128
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"] # Reference Nginx SG
   }
 
   egress {
