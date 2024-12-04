@@ -39,7 +39,7 @@ resource "aws_launch_template" "nginxlt" {
   vpc_security_group_ids = [resource.aws_security_group.nginx_sg.id]
 
   # Reference the external user data file
-  user_data = file("user-data_nginx.sh")
+  user_data = file("userdata_nginx.sh")
 
   tag_specifications {
     resource_type = "instance"
