@@ -39,7 +39,14 @@ resource "aws_launch_template" "wordpresslt" {
   vpc_security_group_ids = [resource.aws_security_group.wordpress_sg.id]
 
   # Reference the external user data file
-  user_data = file("userdata_wordpress.sh")
+  user_data = <<EOF
+
+  #!/bin/bash
+sudo yum update -y
+sudo yum install -y httpd 
+sudo systemctl start httpd
+sudo systemctl enable httpd
+EOF
 
   tag_specifications {
     resource_type = "instance"
