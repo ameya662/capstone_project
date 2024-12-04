@@ -1,7 +1,3 @@
-data "http" "my_ip" {
-  url = "http://checkip.amazonaws.com"
-}
-
 # Create a security group allowing SSH and HTTP access
 resource "aws_security_group" "nginx_sg" {
   name   = "NginxSG"

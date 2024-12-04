@@ -1,7 +1,3 @@
-data "http" "my_ip" {
-  url = "http://checkip.amazonaws.com"
-}
-
 resource "aws_security_group" "wordpress_sg" {
   name   = "WordPressSG"
   vpc_id = aws_vpc.lab_vpc.id
