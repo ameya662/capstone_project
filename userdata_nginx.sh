@@ -1,5 +1,9 @@
 #!/bin/bash
+sleep 100 s
 sudo yum update -y
+sudo yum install squid -y
+sudo systemctl enable squid
+sudo systemctl start squid
 sudo yum install nginx -y
 sudo systemctl start nginx
 sudo systemctl enable nginx

@@ -1,3 +1,7 @@
+data "http" "my_ip" {
+  url = "http://checkip.amazonaws.com"
+}
+
 # Create a security group allowing SSH and HTTP access
 resource "aws_security_group" "nginx_sg" {
   name   = "NginxSG"
@@ -17,6 +21,14 @@ resource "aws_security_group" "nginx_sg" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+   ingress {
+    description      = "Allow Squid from Wordpress SG"
+    from_port        = 3128
+    to_port          = 3128
+    protocol         = "tcp"
+    security_groups  = [aws_security_group.wordpress_sg.id] # Reference Nginx SG
   }
 
   egress {
