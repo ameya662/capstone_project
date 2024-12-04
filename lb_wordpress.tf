@@ -39,7 +39,7 @@ resource "aws_launch_template" "wordpresslt" {
   vpc_security_group_ids = [resource.aws_security_group.wordpress_sg.id]
 
   # Reference the external user data file
-  user_data = filebase64("userdata_wordpress.sh")
+  #user_data = filebase64("userdata_wordpress.sh")
 
   tag_specifications {
     resource_type = "instance"
@@ -51,9 +51,9 @@ resource "aws_launch_template" "wordpresslt" {
 
 # Auto Scaling Group
 resource "aws_autoscaling_group" "wordpressasg" {
-  desired_capacity     = 2
-  min_size             = 2
-  max_size             = 4
+  desired_capacity     = 1
+  min_size             = 1
+  max_size             = 1
   vpc_zone_identifier  = [resource.aws_subnet.private_subnet_1.id, resource.aws_subnet.private_subnet_2.id]
   launch_template {
     id      = aws_launch_template.wordpresslt.id
