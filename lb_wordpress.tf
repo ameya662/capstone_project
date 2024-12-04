@@ -38,6 +38,9 @@ resource "aws_launch_template" "wordpresslt" {
   key_name               = "vockey"
   vpc_security_group_ids = [resource.aws_security_group.wordpress_sg.id]
 
+  # Reference the external user data file
+  user_data = file("user-data_wordpress.sh")
+
   tag_specifications {
     resource_type = "instance"
     tags = {

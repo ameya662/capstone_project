@@ -3,6 +3,14 @@ resource "aws_security_group" "wordpress_sg" {
   vpc_id = aws_vpc.lab_vpc.id
 
   ingress {
+    description = "Allow SSH from my public IP"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["${chomp(data.http.my_ip.body)}/32"] # Fetch and use public IP
+  }
+
+  ingress {
     description      = "Allow HTTP from Nginx SG"
     from_port        = 80
     to_port          = 80

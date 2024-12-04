@@ -1,15 +1,14 @@
 # Create a security group allowing SSH and HTTP access
-
 resource "aws_security_group" "nginx_sg" {
   name   = "NginxSG"
   vpc_id = aws_vpc.lab_vpc.id
 
   ingress {
-    description = "Allow SSH"
+    description = "Allow SSH from my public IP"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${chomp(data.http.my_ip.body)}/32"] # Fetch and use public IP
   }
 
   ingress {
