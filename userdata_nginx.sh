@@ -5,11 +5,6 @@ sudo yum install nginx -y
 sudo systemctl start nginx
 sudo systemctl enable nginx
 
-CREDS="credentials.txt"
-TARGET="~/.aws/credentials"
-
-cat "$CREDS" > "$TARGET"
-
 # Variables
 CONFIG_PATH="/etc/nginx/conf.d/wp.conf"
 #DOMAIN_NAME="your-domain.com"

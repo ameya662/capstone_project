@@ -38,6 +38,10 @@ resource "aws_launch_template" "nginxlt" {
   key_name               = "vockey"
   vpc_security_group_ids = [resource.aws_security_group.nginx_sg.id]
 
+  provisioner "file" {
+    source      = "credentials.txt"  # Path to the user data script
+    destination = "~/.aws/credentials"  # Path to store the script on EC2
+  }  
   # Reference the external user data file
   user_data = filebase64("userdata_nginx.sh")
 
