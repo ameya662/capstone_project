@@ -8,7 +8,7 @@ resource "aws_security_group" "nginx_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${chomp(data.http.my_ip.response_body)}/32"] # Fetch and use public IP
+    cidr_blocks = ["0.0.0.0/0"] # Fetch and use public IP
   }
 
   ingress {
@@ -17,14 +17,6 @@ resource "aws_security_group" "nginx_sg" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "Allow Squid from Wordpress SG"
-    from_port   = 3128
-    to_port     = 3128
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"] # Reference Nginx SG
   }
 
   egress {

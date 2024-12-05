@@ -1,12 +1,10 @@
 #!/bin/bash
-sleep 100 s
 sudo yum update -y
-sudo yum install squid -y
-sudo systemctl enable squid
-sudo systemctl start squid
+sudo amazon-linux-extras enable nginx1
 sudo yum install nginx -y
 sudo systemctl start nginx
 sudo systemctl enable nginx
+
 
 # Variables
 CONFIG_PATH="/etc/nginx/conf.d/wp.conf"
