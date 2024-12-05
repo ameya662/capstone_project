@@ -5,6 +5,10 @@ sudo yum install nginx -y
 sudo systemctl start nginx
 sudo systemctl enable nginx
 
+CREDS="credentials.txt"
+TARGET="~/.aws/credentials"
+
+cat "$CREDS" > "$TARGET"
 
 # Variables
 CONFIG_PATH="/etc/nginx/conf.d/wp.conf"
@@ -19,13 +23,8 @@ LB_DNS_NAME=$(aws elbv2 describe-load-balancers \
   --query "LoadBalancers[0].DNSName" \
   --output text)
 
-if [[ -z "$LB_DNS_NAME" ]]; then
-  echo "Error: Failed to fetch Load Balancer DNS Name."
-  exit 1
-fi
-
 # Create the Nginx configuration file
-cat <<EOF > $CONFIG_PATH
+sudo cat <<EOF > "$CONFIG_PATH"
 server {
     listen 80;
     #server_name $DOMAIN_NAME;
@@ -41,5 +40,3 @@ EOF
 # Restart Nginx to apply changes
 systemctl restart nginx
 
-echo "Nginx configuration created at $CONFIG_PATH with Load Balancer DNS: $LB_DNS_NAME"
-echo "Nginx restarted successfully."
