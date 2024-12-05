@@ -1,11 +1,21 @@
 # Elastic IP for NAT Gateway in AZ1
 resource "aws_eip" "nat_gateway_eip_az1" {
-  vpc = true
+  domain = "vpc"
+
+  tags = {
+    Name = "NAT Gateway EIP AZ1"
+    Environment = "Production"  # Adjust as needed
+  }
 }
 
 # Elastic IP for NAT Gateway in AZ2
 resource "aws_eip" "nat_gateway_eip_az2" {
-  vpc = true
+  domain = "vpc"
+
+  tags = {
+    Name = "NAT Gateway EIP AZ2"
+    Environment = "Production"  # Adjust as needed
+  }
 }
 
 # NAT Gateway in AZ1
