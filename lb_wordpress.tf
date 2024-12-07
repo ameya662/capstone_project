@@ -39,7 +39,7 @@ resource "aws_launch_template" "wordpresslt" {
   vpc_security_group_ids = [resource.aws_security_group.wordpress_sg.id]
 
   # Reference the external user data file
-  #user_data = filebase64("userdata_wordpress.sh")
+  user_data = filebase64("userdata_wordpress.sh")
 
   tag_specifications {
     resource_type = "instance"

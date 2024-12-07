@@ -8,7 +8,7 @@ resource "aws_security_group" "nginx_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Fetch and use public IP
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
