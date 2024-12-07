@@ -39,7 +39,7 @@ resource "aws_launch_template" "nginxlt" {
   vpc_security_group_ids = [resource.aws_security_group.nginx_sg.id]
 
   # Reference the external user data file
-  #user_data = filebase64("userdata_nginx.sh")
+  user_data = filebase64("userdata_nginx.sh")
 
   tag_specifications {
     resource_type = "instance"
@@ -51,9 +51,9 @@ resource "aws_launch_template" "nginxlt" {
 
 # Auto Scaling Group
 resource "aws_autoscaling_group" "nginxasg" {
-  desired_capacity     = 1
-  min_size             = 1
-  max_size             = 1
+  desired_capacity     = 2
+  min_size             = 2
+  max_size             = 4
   vpc_zone_identifier  = [resource.aws_subnet.public_subnet_1.id, resource.aws_subnet.public_subnet_2.id]
   launch_template {
     id      = aws_launch_template.nginxlt.id
