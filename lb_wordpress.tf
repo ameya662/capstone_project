@@ -35,7 +35,7 @@ resource "aws_launch_template" "wordpresslt" {
   description            = "Launch template for wordpress"
   image_id               = "ami-061dd8b45bc7deb3d" # Replace with actual Amazon Linux 2 AMI ID
   instance_type          = "t3.micro"
-  key_name               = "vockey"
+  #key_name               = "vockey"
   vpc_security_group_ids = [resource.aws_security_group.wordpress_sg.id]
 
   # Reference the external user data file
