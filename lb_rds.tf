@@ -17,6 +17,8 @@ resource "aws_rds_cluster" "wordpress_cluster" {
     Name        = "wordpress-cluster"
     Environment = "Project"
   }
+  skip_final_snapshot = true
+
 }
 
 resource "aws_db_subnet_group" "wordpress_db_subnet_group" {

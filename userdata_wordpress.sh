@@ -14,22 +14,15 @@ chown -R apache:apache /var/www/html
 chmod -R 755 /var/www/html
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
+ENDPOINT=$(aws rds describe-db-clusters \
+--query 'DBClusters[?DBClusterIdentifier==`wordpress-cluster`].Endpoint' \
+--output text)
+
 # Configure WordPress
-cat > /var/www/html/wp-config.php <<EOF
-<?php
-define('DB_NAME', 'WPDB');
-define('DB_USER', 'admin');
-define('DB_PASSWORD', 'MySQLadm1n');
-define('DB_HOST', "${aws_rds_cluster.wordpress_cluster.endpoint}");
-define('DB_CHARSET', 'utf8');
-define('DB_COLLATE', '');
-define('FS_METHOD', 'direct');
-define('WP_DEBUG', false);
-if (!defined('ABSPATH')) {
-    define('ABSPATH', dirname(__FILE__) . '/');
-}
-require_once ABSPATH . 'wp-settings.php';
-EOF
+sudo sed -i "s/'database_name_here'/'wordpress'/g" wp-config.php
+sudo sed -i "s/'username_here'/'wordpressuser'/g" wp-config.php
+sudo sed -i "s/'password_here'/'password'/g" wp-config.php
+sudo sed -i "s/'localhost'/'$ENDPOINT'/g" wp-config.php
 
 amazon-linux-extras enable php8.0
 yum clean metadata
