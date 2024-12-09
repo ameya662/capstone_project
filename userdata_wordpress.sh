@@ -36,8 +36,3 @@ yum clean metadata
 yum install php-cli php-pdo php-fpm php-mysqlnd php-json php-mbstring php-xml php-common
 
 systemctl restart httpd
-
-tags = {
-    Name        = "WordPress-Instance-${count.index + 1}"
-    Environment = "Project"
-}
