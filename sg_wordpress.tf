@@ -18,6 +18,14 @@ resource "aws_security_group" "wordpress_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "Allow access to RDS"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    security_groups = [aws_security_group.db_sg.id]
+  }
+
   #Allow ICMP from nginx_sg
   ingress {
     description = "Allow ICMP from Nginx SG"
