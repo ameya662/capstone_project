@@ -23,13 +23,23 @@ resource "aws_rds_cluster" "wordpress_cluster" {
 
 resource "aws_db_subnet_group" "wordpress_db_subnet_group" {
   name       = "wordpress-db-subnet-group"
-  subnet_ids = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
+  subnet_ids = [aws_subnet.private_subnet_1.id]
 
   tags = {
     Name        = "wordpress-db-subnet-group"
     Environment = "Project"
   }
 }
+
+# resource "aws_db_subnet_group" "wordpress_db_subnet_group" {
+#   name       = "wordpress-db-subnet-group"
+#   subnet_ids = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
+
+#   tags = {
+#     Name        = "wordpress-db-subnet-group"
+#     Environment = "Project"
+#   }
+# }
 
 resource "aws_rds_cluster_instance" "primary_instance" {
   identifier              = "wordpress-cluster-primary"
@@ -48,19 +58,19 @@ resource "aws_rds_cluster_instance" "primary_instance" {
   }
 }
 
-resource "aws_rds_cluster_instance" "secondary_instance" {
-  identifier              = "wordpress-cluster-secondary"
-  cluster_identifier      = aws_rds_cluster.wordpress_cluster.id
-  instance_class          = "db.t3.medium"
-  engine                  = aws_rds_cluster.wordpress_cluster.engine
-  engine_version          = aws_rds_cluster.wordpress_cluster.engine_version
-  publicly_accessible     = false
-  db_subnet_group_name    = aws_db_subnet_group.wordpress_db_subnet_group.name
-  apply_immediately       = true
-  availability_zone       = "us-west-2b"
+# resource "aws_rds_cluster_instance" "secondary_instance" {
+#   identifier              = "wordpress-cluster-secondary"
+#   cluster_identifier      = aws_rds_cluster.wordpress_cluster.id
+#   instance_class          = "db.t3.medium"
+#   engine                  = aws_rds_cluster.wordpress_cluster.engine
+#   engine_version          = aws_rds_cluster.wordpress_cluster.engine_version
+#   publicly_accessible     = false
+#   db_subnet_group_name    = aws_db_subnet_group.wordpress_db_subnet_group.name
+#   apply_immediately       = true
+#   availability_zone       = "us-west-2b"
 
-  tags = {
-    Name        = "wordpress-cluster-secondary"
-    Environment = "Project"
-  }
-}
+#   tags = {
+#     Name        = "wordpress-cluster-secondary"
+#     Environment = "Project"
+#   }
+# }
