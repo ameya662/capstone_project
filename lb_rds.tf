@@ -23,23 +23,13 @@ resource "aws_rds_cluster" "wordpress_cluster" {
 
 resource "aws_db_subnet_group" "wordpress_db_subnet_group" {
   name       = "wordpress-db-subnet-group"
-  subnet_ids = [aws_subnet.private_subnet_1.id]
+  subnet_ids = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
 
   tags = {
     Name        = "wordpress-db-subnet-group"
     Environment = "Project"
   }
 }
-
-# resource "aws_db_subnet_group" "wordpress_db_subnet_group" {
-#   name       = "wordpress-db-subnet-group"
-#   subnet_ids = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
-
-#   tags = {
-#     Name        = "wordpress-db-subnet-group"
-#     Environment = "Project"
-#   }
-# }
 
 resource "aws_rds_cluster_instance" "primary_instance" {
   identifier              = "wordpress-cluster-primary"
