@@ -3,7 +3,7 @@ sudo -s
 sleep 300
 yum update -y
 amazon-linux-extras enable php8.0
-yum install -y httpd php php-mysqlnd php-cli php-pdo php-fpm php-json php-mbstring php-xml php-common
+yum install -y httpd php php-mysqlnd php-cli php-pdo php-fpm php-json php-mbstring php-xml php-common mysql
 systemctl enable httpd
 systemctl start httpd
 
