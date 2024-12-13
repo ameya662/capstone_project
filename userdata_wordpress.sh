@@ -49,3 +49,21 @@ define('WP_SITEURL', 'http://globalharmony.publicvm.com');
 EOF
 
 systemctl restart httpd
+
+exit 
+
+# aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+# aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+# aws configure set region $AWS_DEFAULT_REGION
+
+# aws s3 cp s3://globalharmonybucket/wordpress-backup.tar.gz /tmp/
+
+# tar -xzvf /tmp/wordpress-backup.tar.gz 
+
+# cd /tmp/var/www/html
+
+# sudo cp -rf * /var/www/html
+
+# aws s3 cp s3://globalharmonybucket/db-backup.sql /tmp/
+
+# sudo mysql -h wordpress-cluster.cluster-ctmpvoaw2olz.us-west-2.rds.amazonaws.com -u admin -pMySQLadm1n WPDB < /tmp/db-backup.sql
