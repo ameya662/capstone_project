@@ -43,7 +43,7 @@ sudo sed -i "s/'username_here'/'admin'/g" /var/www/html/wp-config.php
 sudo sed -i "s/'password_here'/'MySQLadm1n'/g" /var/www/html/wp-config.php
 sudo sed -i "s/'localhost'/'$ENDPOINT'/g" /var/www/html/wp-config.php
 
-cat >> wp-config.php << EOF
+cat >> /var/www/html/wp-config.php << EOF
 define('WP_HOME', 'http://globalharmony.publicvm.com');
 define('WP_SITEURL', 'http://globalharmony.publicvm.com');
 EOF
