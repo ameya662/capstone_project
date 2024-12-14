@@ -1,5 +1,5 @@
 module "newrelic-aws-cloud-integrations" {
-  source = "newrelic/cloud-integrations/aws"
+  source = "newrelic/cloud-integrations/newrelic/aws"
 
   newrelic_account_id     = 6264788
   newrelic_account_region = "US"
