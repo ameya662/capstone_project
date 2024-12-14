@@ -1,5 +1,5 @@
 module "newrelic-aws-cloud-integrations" {
-  source = "source = "github.com/newrelic/terraform-provider-newrelic//examples/modules/cloud-integrations/aws"
+  source = "github.com/newrelic/terraform-provider-newrelic//examples/modules/cloud-integrations/aws"
 
   newrelic_account_id     = 6264788
   newrelic_account_region = "US"
