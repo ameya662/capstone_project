@@ -16,9 +16,9 @@ chmod -R 755 /var/www/html
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
 # Set AWS access credentials and region
-AWS_ACCESS_KEY_ID="ASIA3D2JXZQPOSLIC3RL"
-AWS_SECRET_ACCESS_KEY="L8m6/OgFzmgyoLbHdDFzPz21fhquU7EV+dyd8gYq"
-AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjEBIaCXVzLXdlc3QtMiJIMEYCIQDqVusu4wLvj8ZSDEkTqmUwhymMKQUaLobIMoxZpMOWcAIhAItqatoQYzdV0Wr+26ariczY0s3v/bkRs6mA+pOusCTfKroCCMv//////////wEQARoMNzY0MTIxOTU5NDU0IgyLZI7AgvemvWuha5wqjgLUDnYcWo/vtC4Gc+/99yr67C6SWGZXfmM+kJH6wnsJwfKSg8UC5U/rYkPNBksSR3ADMZ9YromKYhr2pJzzGSQr06GrPmjnb1gV0Xdavh/+4f8CAZJR4MuyGe3AM0JKkljlbvGI6oPuQAHrWrp8XyejEXeuku+4pxWyu4oY1B/MJk2Ly34mGSKNM+ObbIcw3tOwA7WI6RuDmdlc4+UxVkwtDrxv6erfr9X+27C8C+FSFLmzQJGYJByjGzN+5IYd5mcNRr3897QlwxGlUDqdC5pCSEY9REjb4Pzjly4duRIPnTFa0KzLOaSoL39UQIoHZ5JWzcIPOJ1E++FEevBhSlnLG66QLbzJtsUYIlAF1N0w3ZjuugY6nAEPTJxG4q2qeUd2wSl8lt5FF/NItALlcMkX4DHNVIxtnYWw403DOX2oitZDBid8jqL9dH31WT99hUv5liJh4TZ0u38gaFapHWGxKXtqFpKcQ5AuPLPR/JpVdp3gP9CtPhcXyd1gRWkwDe6Eb46z0OOTMD44i9dy3mrZbLAdgXn5NocyKCt7JypMHBmEdY5Q3llgikJYeH9bIv4HSdM="
+AWS_ACCESS_KEY_ID="ASIA3D2JXZQPIQHVX4XV"
+AWS_SECRET_ACCESS_KEY="sgcWk/JtvGkiTETlmSyVpfmkhvnbIFcEEMvTSAPi"
+AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJHMEUCIHk7gheIMaqf72DZbFbTlqUG8rg6pRs1LGbCKdMCp0+aAiEA/Qn5i648eYtW4AQ2sDZEyHOc7DHwQxO7R7Jq8CSoIfoqugII9f//////////ARABGgw3NjQxMjE5NTk0NTQiDP5F6XRFOvcPohg4+CqOAmuhQltJL2YLGYRyLUS68lHKhC9wQhkR1hqHZnz3YJR8VYW/P9FUKgmkbSB5qvwuhOMT2SqYIooH0Zzd30DascKX/h8f7rGbeYSi5q5KTluuoyfiZFaYZr3rtLsRDFBSu2l9vt4ARyUWFF5/afKE4Vf7DU1Yq9+vrpowXUdbvPYq4aPTc+kgCCJhAphCyJ583kgIlSADlmMr+dW13ismimSzYZtcag7MqSkzSVnQgOlRpypCmkqL/bRBBhsnKU+pS0pje5cp3f1+PELvG18xUF7Z5biBCtJT2jeKKJk3gV7xohQ12KFGJtqphnsydcY+Plub5rx7pS/KGwf8MXILb/rk9AbIFEMzrQCCFRhWtTCfwve6BjqdAXHpo8uJBDVNPXGUkxHpbLJ4bSJp5WVwpujhjC2Jd3noB+/utvKYEqp2iZ5cEXfg3r7esV2NKKlmpl5/0+q0R5NwQVva5cHKJDCw5Kc4W/wF8xw2/0gGxRGZadq8uEuMgonf9/HvVDhE3/QNNkxoiGAdAcpbVq+cucjGTn7Wi4f/3YBpL94tGCCUpoGXgvEZldKXFDUOu5SCUqRMbnk="
 AWS_DEFAULT_REGION="us-west-2"
 
 # Set AWS CLI configuration
@@ -52,18 +52,24 @@ systemctl restart httpd
 
 exit 
 
-# aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-# aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-# aws configure set region $AWS_DEFAULT_REGION
+AWS_ACCESS_KEY_ID="AKIAQ4J5YK4RSC3LLUMS"
+AWS_SECRET_ACCESS_KEY="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"
+AWS_DEFAULT_REGION="us-west-2"
 
-# aws s3 cp s3://globalharmonybucket/wordpress-backup.tar.gz /tmp/
+aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+aws configure set region $AWS_DEFAULT_REGION
 
-# tar -xzvf /tmp/wordpress-backup.tar.gz 
+aws s3 cp s3://globalharmonybucket/wordpress-backup.tar.gz /tmp/
 
-# cd /tmp/var/www/html
+cd /tmp
 
-# sudo cp -rf * /var/www/html
+tar -xzvf wordpress-backup.tar.gz 
 
-# aws s3 cp s3://globalharmonybucket/db-backup.sql /tmp/
+cd var/www/html
 
-# sudo mysql -h wordpress-cluster.cluster-ctmpvoaw2olz.us-west-2.rds.amazonaws.com -u admin -pMySQLadm1n WPDB < /tmp/db-backup.sql
+sudo cp -rf * /var/www/html
+
+aws s3 cp s3://globalharmonybucket/db-backup.sql /tmp/
+
+sudo mysql -h wordpress-cluster.cluster-ctmpvoaw2olz.us-west-2.rds.amazonaws.com -u admin -pMySQLadm1n WPDB < /tmp/db-backup.sql
