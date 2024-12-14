@@ -6,7 +6,7 @@ module "newrelic-aws-cloud-integrations" {
   name                    = "production"
 
   include_metric_filters = {
-    "AWS/EC2" = [], # include ALL metrics from the EC2 namespace
+    "AWS/EC2" = [],
     "AWS/RDS" = [],
   }
 }
