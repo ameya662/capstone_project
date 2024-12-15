@@ -41,7 +41,7 @@ resource "aws_launch_template" "wordpresslt" {
   vpc_security_group_ids = [resource.aws_security_group.wordpress_sg.id]
 
   # Reference the external user data file
-  user_data = filebase64("${path.module}/userdata_wordpress.sh.tpl", {
+  user_data = base64encode(templatefile("${path.module}/userdata_wordpress.sh.tpl"), {
     AWS_ACCESS_KEY_ID     = var.AWS_ACCESS_KEY_ID
     AWS_SECRET_ACCESS_KEY = var.AWS_SECRET_ACCESS_KEY
     AWS_SESSION_TOKEN     = var.AWS_SESSION_TOKEN
