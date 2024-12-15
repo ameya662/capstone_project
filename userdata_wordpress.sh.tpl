@@ -50,19 +50,35 @@ EOF
 
 systemctl restart httpd
 
-exit 
+check_rds_status() {
+    aws rds describe-db-clusters \
+    --query 'DBClusters[?DBClusterIdentifier==`wordpress-cluster`].Status' \
+    --output text | grep -q "available"
+    return $?
+}
 
-sleep 200
+# Wait for RDS cluster to be available (timeout after 20 minutes)
+echo "Waiting for RDS cluster to be available..."
+counter=0
+while ! check_rds_status; do
+    if [ $counter -eq 40 ]; then
+        echo "Timeout waiting for RDS cluster"
+        exit 1
+    fi
+    echo "RDS cluster not ready yet... waiting 30 seconds"
+    sleep 30
+    counter=$((counter + 1))
+done
 
 export PER_ACCESS_KEY_ID=${PER_ACCESS_KEY_ID}
 export PER_SECRET_ACCESS_KEY=${PER_SECRET_ACCESS_KEY}
 export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
-aws configure set aws_access_key_id $PER_ACCESS_KEY_ID
-aws configure set aws_secret_access_key $PER_SECRET_ACCESS_KEY
-aws configure set region $AWS_DEFAULT_REGION
+aws configure set aws_access_key_id $PER_ACCESS_KEY_ID --profile per
+aws configure set aws_secret_access_key $PER_SECRET_ACCESS_KEY --profile per
+aws configure set region $AWS_DEFAULT_REGION --profile per
 
-aws s3 cp s3://globalharmonybucket/wordpress-backup.tar.gz /tmp/
+aws s3 cp s3://globalharmonybucket/wordpress-backup.tar.gz /tmp/ --profile per
 
 cd /tmp
 
@@ -72,6 +88,6 @@ cd var/www/html
 
 sudo cp -rf * /var/www/html
 
-aws s3 cp s3://globalharmonybucket/db-backup.sql /tmp/
+aws s3 cp s3://globalharmonybucket/db-backup.sql /tmp/ --profile per
 
 sudo mysql -h wordpress-cluster.cluster-ctmpvoaw2olz.us-west-2.rds.amazonaws.com -u admin -pMySQLadm1n WPDB < /tmp/db-backup.sql
