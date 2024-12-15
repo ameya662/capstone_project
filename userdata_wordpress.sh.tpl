@@ -16,10 +16,10 @@ chmod -R 755 /var/www/html
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
 # Set AWS access credentials and region
-export AWS_ACCESS_KEY_ID=${var.AWS_ACCESS_KEY_ID}
-export AWS_SECRET_ACCESS_KEY=${var.AWS_SECRET_ACCESS_KEY}
-export AWS_SESSION_TOKEN=${var.AWS_SESSION_TOKEN}
-export AWS_DEFAULT_REGION=${var.AWS_DEFAULT_REGION}
+export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+export AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
 # Set AWS CLI configuration
 aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
@@ -54,9 +54,9 @@ exit
 
 sleep 200
 
-export PER_ACCESS_KEY_ID=${var.PER_ACCESS_KEY_ID}
-export PER_SECRET_ACCESS_KEY=${var.PER_SECRET_ACCESS_KEY}
-export AWS_DEFAULT_REGION=${var.AWS_DEFAULT_REGION}
+export PER_ACCESS_KEY_ID=${PER_ACCESS_KEY_ID}
+export PER_SECRET_ACCESS_KEY=${PER_SECRET_ACCESS_KEY}
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
 aws configure set aws_access_key_id $PER_ACCESS_KEY_ID
 aws configure set aws_secret_access_key $PER_SECRET_ACCESS_KEY
