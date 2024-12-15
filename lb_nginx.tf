@@ -43,12 +43,12 @@ resource "aws_launch_template" "nginxlt" {
 
   # Reference the external user data file
 
-  user_data = base64encode(templatefile("${path.module}/userdata_nginx.sh.tpl"), {
+  user_data = base64encode(templatefile("${path.module}/userdata_nginx.sh.tpl", {
     AWS_ACCESS_KEY_ID     = var.AWS_ACCESS_KEY_ID
     AWS_SECRET_ACCESS_KEY = var.AWS_SECRET_ACCESS_KEY
     AWS_SESSION_TOKEN     = var.AWS_SESSION_TOKEN
     AWS_DEFAULT_REGION    = var.AWS_DEFAULT_REGION
-  })
+  }))
 
   tag_specifications {
     resource_type = "instance"
