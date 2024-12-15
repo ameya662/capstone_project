@@ -6,6 +6,9 @@ resource "aws_lb" "nginx_alb" {
   security_groups    = [resource.aws_security_group.nginx_sg.id]
   subnets            = [resource.aws_subnet.public_subnet_1.id, resource.aws_subnet.public_subnet_2.id]
   ip_address_type    = "ipv4"
+
+  enable_deletion_protection = false
+
 }
 
 # Target Group

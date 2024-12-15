@@ -52,6 +52,8 @@ systemctl restart httpd
 
 exit 
 
+sleep 200
+
 export PER_ACCESS_KEY_ID=${var.PER_ACCESS_KEY_ID}
 export PER_SECRET_ACCESS_KEY=${var.PER_SECRET_ACCESS_KEY}
 export AWS_DEFAULT_REGION=${var.AWS_DEFAULT_REGION}
