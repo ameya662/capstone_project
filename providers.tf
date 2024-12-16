@@ -2,13 +2,13 @@ provider "aws" {
   region = "us-west-2"
 }
 
-terraform {
-  cloud {
-    workspaces {
-      name = "capstone_project"
-    }
-  }
-}
+# terraform {
+#   cloud {
+#     workspaces {
+#       name = "capstone_project"
+#     }
+#   }
+# }
 
 # provider "newrelic" {
 #   account_id = 6264788           # Your New Relic account ID

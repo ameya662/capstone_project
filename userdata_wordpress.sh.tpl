@@ -91,3 +91,6 @@ sudo cp -rf * /var/www/html
 aws s3 cp s3://globalharmonybucket/db-backup.sql /tmp/ --profile per
 
 sudo mysql -h wordpress-cluster.cluster-ctmpvoaw2olz.us-west-2.rds.amazonaws.com -u admin -pMySQLadm1n WPDB < /tmp/db-backup.sql
+
+sudo chmod -R 755 /var/www/html/wp-content/uploads
+sudo chown -R apache:apache /var/www/html/wp-content/uploads
