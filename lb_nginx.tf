@@ -60,9 +60,9 @@ resource "aws_launch_template" "nginxlt" {
 
 # Auto Scaling Group
 resource "aws_autoscaling_group" "nginxasg" {
-  desired_capacity     = 2
-  min_size             = 2
-  max_size             = 4
+  desired_capacity     = 1
+  min_size             = 1
+  max_size             = 1
   vpc_zone_identifier  = [resource.aws_subnet.public_subnet_1.id, resource.aws_subnet.public_subnet_2.id]
   launch_template {
     id      = aws_launch_template.nginxlt.id

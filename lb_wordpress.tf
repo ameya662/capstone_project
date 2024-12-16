@@ -60,9 +60,9 @@ resource "aws_launch_template" "wordpresslt" {
 
 # Auto Scaling Group
 resource "aws_autoscaling_group" "wordpressasg" {
-  desired_capacity     = 4
-  min_size             = 4
-  max_size             = 4
+  desired_capacity     = 1
+  min_size             = 1
+  max_size             = 1
   vpc_zone_identifier  = [resource.aws_subnet.private_subnet_1.id, resource.aws_subnet.private_subnet_2.id]
   launch_template {
     id      = aws_launch_template.wordpresslt.id

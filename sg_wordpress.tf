@@ -19,6 +19,14 @@ resource "aws_security_group" "wordpress_sg" {
   }
 
   ingress {
+    description = "Allow HTTPs"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     description = "Allow access to RDS"
     from_port   = 3306
     to_port     = 3306
