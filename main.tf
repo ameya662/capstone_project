@@ -36,7 +36,7 @@ variable "AWS_SESSION_TOKEN" {
 
 variable "AWS_DEFAULT_REGION" {
   type        = string
-  default     = "us-west-2"  # Default region, can be customized
+  default     = "us-west-2"
 }
 
 variable "PER_ACCESS_KEY_ID" {
