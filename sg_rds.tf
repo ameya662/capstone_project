@@ -12,7 +12,7 @@ resource "aws_security_group" "db_sg" {
   }
 
   egress {
-    description = "Allow all outbound"
+    description = "Allow outbound"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
