@@ -15,7 +15,7 @@ resource "aws_lb" "nginx_alb" {
 resource "aws_lb_target_group" "nginxtg" {
   name        = "nginxtg"
   port        = 443
-  protocol    = "HTTP"
+  protocol    = "HTTPS"
   vpc_id      = resource.aws_vpc.lab_vpc.id
   target_type = "instance"
 }
