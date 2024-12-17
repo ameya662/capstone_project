@@ -34,9 +34,21 @@ LB_DNS_NAME=$(aws elbv2 describe-load-balancers \
 
 cat > /etc/nginx/conf.d/default.conf << EOF
 server {
-    listen 443 ssl;
-   # server_name 34.212.55.22;
+    listen 80;
+    server_name globalharmony.publicvpc.com;
 
+    # Redirect all HTTP requests to HTTPS
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name globalharmony.publicvpc.com;
+
+    ssl_certificate /etc/nginx/ca/ca.crt;
+    ssl_certificate_key /etc/nginx/ca/ca.key;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
     location / {
         proxy_pass http://$LB_DNS_NAME:80;
         proxy_ssl_verify off;
@@ -46,6 +58,17 @@ server {
     }
 }  
 EOF
+
+cd /etc/nginx/ca
+
+openssl req -newkey rsa:4096 \
+            -x509 \
+            -sha256 \
+            -days 3650 \
+            -nodes \
+            -out ca.crt \
+            -keyout ca.key \
+            -subj "/C=DE/ST=BERLIN/L=BERLIN/O=Project/OU=Project/CN=globalharmony.publicvpc.com/emailAddress=ameyaexcl@gmail.com"
 
 # Restart Nginx to apply changes
 systemctl restart nginx
