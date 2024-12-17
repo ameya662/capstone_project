@@ -34,7 +34,7 @@ LB_DNS_NAME=$(aws elbv2 describe-load-balancers \
 
 cat > /etc/nginx/conf.d/default.conf << EOF
 server {
-    listen 80;
+    listen 443 ssl;
    # server_name 34.212.55.22;
 
     location / {
