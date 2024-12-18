@@ -5,14 +5,13 @@ module "newrelic-aws-cloud-integrations" {
   newrelic_account_region = "US"
   name                    = "production"
 
+  account_id         = 764121959454
+  linked_account_name = "MyAWSAccountIntegration"
+  role_arn           = "arn:aws:iam::764121959454:role/NewRelicIntegrationRole"
+
+
   include_metric_filters = {
     "AWS/EC2" = [],
     "AWS/RDS" = [],
   }
-}
-
-resource "newrelic_integration_aws" "example" {
-  account_id         = 764121959454
-  linked_account_name = "MyAWSAccountIntegration"
-  role_arn           = "arn:aws:iam::764121959454:role/NewRelicIntegrationRole"
 }
