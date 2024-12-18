@@ -50,4 +50,4 @@ EOF
 # Restart Nginx to apply changes
 systemctl restart nginx
 
-# curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY=NRAK-LWRZZ1TUQLMPF4NQIYEGJR0EN8M NEW_RELIC_ACCOUNT_ID=6264788 /usr/local/bin/newrelic install -y
+curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY=NRAK-LWRZZ1TUQLMPF4NQIYEGJR0EN8M NEW_RELIC_ACCOUNT_ID=6264788 /usr/local/bin/newrelic install -y
