@@ -1,9 +1,8 @@
 # Declare the variable for the New Relic API Key
-# variable "newrelic_api_key" {
-#   type        = string
-#   description = "New Relic API Key"
-#   sensitive = true
-# }
+variable "newrelic_api_key" {
+  type        = string
+  sensitive = true
+}
 
 # AWS Provider Configuration
 variable "AWS_ACCESS_KEY_ID" {
