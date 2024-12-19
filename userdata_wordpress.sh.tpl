@@ -52,47 +52,47 @@ systemctl restart httpd
 
 curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY=NRAK-LWRZZ1TUQLMPF4NQIYEGJR0EN8M NEW_RELIC_ACCOUNT_ID=6264788 /usr/local/bin/newrelic install -y
 
-# check_rds_status() {
-#     aws rds describe-db-clusters \
-#     --query 'DBClusters[?DBClusterIdentifier==`wordpress-cluster`].Status' \
-#     --output text | grep -q "available"
-#     return $?
-# }
+check_rds_status() {
+    aws rds describe-db-clusters \
+    --query 'DBClusters[?DBClusterIdentifier==`wordpress-cluster`].Status' \
+    --output text | grep -q "available"
+    return $?
+}
 
-# # Wait for RDS cluster to be available (timeout after 20 minutes)
-# echo "Waiting for RDS cluster to be available..."
-# counter=0
-# while ! check_rds_status; do
-#     if [ $counter -eq 40 ]; then
-#         echo "Timeout waiting for RDS cluster"
-#         exit 1
-#     fi
-#     echo "RDS cluster not ready yet... waiting 30 seconds"
-#     sleep 30
-#     counter=$((counter + 1))
-# done
+# Wait for RDS cluster to be available (timeout after 20 minutes)
+echo "Waiting for RDS cluster to be available..."
+counter=0
+while ! check_rds_status; do
+    if [ $counter -eq 40 ]; then
+        echo "Timeout waiting for RDS cluster"
+        exit 1
+    fi
+    echo "RDS cluster not ready yet... waiting 30 seconds"
+    sleep 30
+    counter=$((counter + 1))
+done
 
-# export PER_ACCESS_KEY_ID=${PER_ACCESS_KEY_ID}
-# export PER_SECRET_ACCESS_KEY=${PER_SECRET_ACCESS_KEY}
-# export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+export PER_ACCESS_KEY_ID=${PER_ACCESS_KEY_ID}
+export PER_SECRET_ACCESS_KEY=${PER_SECRET_ACCESS_KEY}
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
-# aws configure set aws_access_key_id $PER_ACCESS_KEY_ID --profile per
-# aws configure set aws_secret_access_key $PER_SECRET_ACCESS_KEY --profile per
-# aws configure set region $AWS_DEFAULT_REGION --profile per
+aws configure set aws_access_key_id $PER_ACCESS_KEY_ID --profile per
+aws configure set aws_secret_access_key $PER_SECRET_ACCESS_KEY --profile per
+aws configure set region $AWS_DEFAULT_REGION --profile per
 
-# aws s3 cp s3://globalharmonybucket/wordpress-backup.tar.gz /tmp/ --profile per
+aws s3 cp s3://globalharmonybucket/wordpress-backup.tar.gz /tmp/ --profile per
 
-# cd /tmp
+cd /tmp
 
-# tar -xzvf wordpress-backup.tar.gz 
+tar -xzvf wordpress-backup.tar.gz 
 
-# cd var/www/html
+cd var/www/html
 
-# sudo cp -rf * /var/www/html
+sudo cp -rf * /var/www/html
 
-# aws s3 cp s3://globalharmonybucket/db-backup.sql /tmp/ --profile per
+aws s3 cp s3://globalharmonybucket/db-backup.sql /tmp/ --profile per
 
-# sudo mysql -h wordpress-cluster.cluster-ctmpvoaw2olz.us-west-2.rds.amazonaws.com -u admin -pMySQLadm1n WPDB < /tmp/db-backup.sql
+sudo mysql -h wordpress-cluster.cluster-ctmpvoaw2olz.us-west-2.rds.amazonaws.com -u admin -pMySQLadm1n WPDB < /tmp/db-backup.sql
 
-# sudo chmod -R 755 /var/www/html/wp-content/uploads
-# sudo chown -R apache:apache /var/www/html/wp-content/uploads
+sudo chmod -R 755 /var/www/html/wp-content/uploads
+sudo chown -R apache:apache /var/www/html/wp-content/uploads
