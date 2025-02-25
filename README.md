@@ -13,7 +13,7 @@ The infrastructure includes:
 - **NGINX**: Reverse proxy server deployed in the public subnet.
 - **NGINX ALB**: To scale up the NGINX appliance
 - **WordPress**: Content management system deployed in the private subnet.
-- **WordPress ALB: To scale up the WordPress application
+- **WordPress ALB**: To scale up the WordPress application
 - **RDS**: Managed relational database service for WordPress.
 - **S3**: Backup storage. Hosted on another cloud account.
 - **External DNS**: To use a human friendly URL to access the website hosted on a WordPress
