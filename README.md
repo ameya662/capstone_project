@@ -14,6 +14,8 @@ The infrastructure includes:
 - **WordPress**: Content management system deployed in the private subnet.
 - **RDS**: Managed relational database service for WordPress.
 
+![AWS Architecture](https://github.com/ameya662/capstone_project/blob/main/AWS.jpeg)
+
 ## Prerequisites
 
 - **Terraform**: Ensure Terraform is installed on your machine.
