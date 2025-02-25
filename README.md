@@ -19,5 +19,5 @@ The infrastructure includes:
 - **External DNS**: To use a human friendly URL to access the website hosted on a WordPress
 - **New Relic Monitoring**: To monitor the instrastructure
 
-![AWS Architecture](https://github.com/ameya662/capstone_project/blob/main/AWS.jpeg)
+![AWS Architecture](https://github.com/ameya662/capstone_project/blob/main/AWS.png)
 
